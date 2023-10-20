@@ -1,0 +1,51 @@
+data:
+  data_file: "/data/Multi_Domain_Data/parsed_csv_data/electronics/electronics_review_splits_combined.csv"
+  #"/proj/digbose92/domain_adapt_data/parsed_csv_data/electronics/electronics_review_splits_combined.csv"
+  
+parameters:
+  batch_size: 16
+  train_shuffle: True
+  val_shuffle: False
+  test_shuffle: False
+  epochs: 200
+  early_stop: 5
+  do_lower_case: True
+  max_len: 512
+  padding_type: 'max_length'
+  truncation: True
+  add_special_tokens: True 
+  pad_to_max_length: True 
+  return_token_type_ids: True 
+  return_attention_mask: True 
+  domain_name: 'electronics'
+  
+device:
+  is_cuda: True 
+
+loss:
+  loss_option: 'cross_entropy_label_smoothing'
+  epsilon: 0.2
+     
+optimizer:
+  choice: 'AdamW'
+  lr: 1e-5
+  weight_decay: 0.001
+  scheduler: 'linear_scheduler_with_warmup'
+  num_warmup_steps: 100
+
+model:
+  model_type: 'bert-base-uncased'
+  num_classes: 2
+  hidden_dim: 768
+  hidden_dim_1: 1024
+  drop_prob: 0.3
+  model_freeze_index: None
+  
+output:
+  model_dir: '/home/dbose_usc_edu/data/domain_adapt_data/model_dir_v2'
+  log_dir: '/home/dbose_usc_edu/data/domain_adapt_data/log_dir_v2'
+
+
+ 
+  
+  
